@@ -6,10 +6,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apitask.settings')
 
 django.setup()
 
-
-# import requests
-# from bs4 import BeautifulSoup
-
 from announcement_api.models import Announcement
 
 # HEADERS = {'Accept-Encoding': 'identity'}
@@ -76,7 +72,6 @@ def load_project_database(announcements_count: int) -> None:
 #         author={soup.find(class_='userNick')}, \
 #         views_count={views},\
 #         position={index},")
-
 
 
 if __name__ == '__main__':
