@@ -4,7 +4,7 @@
 {% block content %}
   <h1>Log-in</h1>
 {% if user.is_authenticated %}
-<h2>Hi, {{user.username}}! Now you can try to get access to API!</h2>
+<h2>Hi, {{user.username}}! Now you can try to get access to API! Check <a href="{% url 'announcement' 1%}">this</a></h2>
 {% else %}
   {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>

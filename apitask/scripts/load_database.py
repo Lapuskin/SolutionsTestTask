@@ -43,6 +43,7 @@ DATA = {
 
 
 def load_project_database(announcements_count: int) -> None:
+    '''Скрипт для загрузки данных для теста'''
     for i in range(10):
         Announcement.objects.create(
             header=DATA['header'][i],

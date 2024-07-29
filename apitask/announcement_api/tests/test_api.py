@@ -1,6 +1,7 @@
 import os
 
 import django
+from django.contrib.auth.models import User
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apitask.settings')
 
@@ -14,7 +15,12 @@ from rest_framework.test import APIClient
 
 class TestMyAPI(TestCase):
     def setUp(self):
+        user = User.objects.create(username='root')
+        user.set_password('11111111')
+        user.save()
+
         self.client = APIClient()
+        self.client.login(username='root', password='11111111')
 
     def test_get_data_with_nothing_to_get(self):
         response = self.client.get(reverse('announcement', args=[1]))
@@ -43,3 +49,14 @@ class TestMyAPI(TestCase):
         }
                          )
         self.assertEqual(response['Content-Type'], 'application/json')
+
+
+class TestAPIPermissions(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_is_authenticated_permission(self):
+        response = self.client.get(reverse('announcement', args=[1]))
+
+        self.assertEqual(response.data, {'detail': 'Authentication credentials were not provided.'})
+        self.assertEqual(response.status_code, 403)

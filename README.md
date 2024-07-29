@@ -12,5 +12,23 @@
 ## Тестовый запуск
 ### С использованием docker-compose
 - выполнить `sudo docker-compose up` в корневой директории проекта.
+- открыть браузер и ввести `127.0.0.1:8000` в адресную строку. 
 
 ### С запуском тестового сервера
+- выполнить:
+```
+pip install -r requirements.txt
+cd apitask
+python3 manage.py migrate
+python3 manage.py test
+python3 manage.py < scripts/load_database.py
+python3 manage.py runserver
+```
+
+
+## Ожидаемая логика работы
+- перейдите на `/api/v1/announcements/1`. Ожидаемое поведение:![img.png](img/img.png) Что, к слову, логично, ведь использование апи разрешено исключительно авторизованным пользователям. Самое время стать одним из таких пользователей.
+- перейдите на `auth/register` и заполните пустые поля. Для теста подойдут username: root, password: ea6uquqF.
+- в случае успеха, нас редиректит на `auth/login`, где мы сможем авторизироваться: ![img.png](imgage/img.png)
+- после чего нам будет открыт доступ по вышеупомянутому пути `/api/v1/announcements/1`.
+![img_1.png](img/img_1.png)
