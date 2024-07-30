@@ -1,5 +1,5 @@
 services:
-  app:
+  apitask:
     build:
       context: .
     container_name: apitask
